@@ -143,7 +143,7 @@ alias ohmyzsh="mate ~/.oh-my-zsh"
 # eval "$(fzf --zsh)"
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/powerlevel10k_rainbow.omp.json)"
 eval "$(zoxide init zsh --cmd cd)"
-eval $(ssh-agent)
+eval $(ssh-agent -s)
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
