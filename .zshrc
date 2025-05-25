@@ -4,9 +4,8 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export SSH_AUTH_SOCK="/tmp/ssh-XXXXXXFlIDoH/agent.6502"
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/home/wong/.local/bin
+export PATH="$PATH:$HOME/.local/bin"
 export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.cargo/bin:$PATH"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -143,7 +142,9 @@ alias ohmyzsh="mate ~/.oh-my-zsh"
 # eval "$(fzf --zsh)"
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/powerlevel10k_rainbow.omp.json)"
 eval "$(zoxide init zsh --cmd cd)"
-eval $(ssh-agent -s)
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+  eval "$(ssh-agent -s)"
+fi
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
