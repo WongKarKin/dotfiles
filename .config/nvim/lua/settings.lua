@@ -6,8 +6,8 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 vim.o.relativenumber = true
 
-vim.o.shiftwidth = 2
-vim.o.tabstop = 2
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
 
 vim.o.mouse = "a"
 
@@ -45,10 +45,17 @@ vim.o.scrolloff = 8
 
 vim.o.confirm = true
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
+vim.o.termguicolors = true
+
+vim.g.clipboard = {
+	name = "xclip-wsl",
+	copy = {
+		["+"] = { "xclip", "-quiet", "-i", "-selection", "clipboard" },
+		["*"] = { "xclip", "-quiet", "-i", "-selection", "primary" },
+	},
+	paste = {
+		["+"] = { "xclip", "-o", "-selection", "clipboard" },
+		["*"] = { "xclip", "-o", "-selection", "primary" },
+	},
+	cache_enabled = 1, -- cache MUST be enabled, or else it hangs on dd/y/x and all other copy operations
+}

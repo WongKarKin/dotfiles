@@ -103,10 +103,14 @@ bindkey '^n' history-search-backward
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions fzf-tab)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions fzf-tab tmux)
 
 # Load Completions
 autoload -U compinit && compinit
+
+# Tmux auto-start settings
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART_SESSION="main"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -138,10 +142,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# eval "$(fzf --zsh)"
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/powerlevel10k_rainbow.omp.json)"
 eval "$(zoxide init zsh --cmd cd)"
+eval $(keychain --eval githubrsakey)
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
   eval "$(ssh-agent -s)"
 fi
@@ -154,3 +157,7 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+cd $HOME

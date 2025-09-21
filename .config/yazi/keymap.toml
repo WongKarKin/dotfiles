@@ -1,0 +1,13 @@
+[[mgr.prepend_keymap]]
+on  = [ "g", "d" ]
+run = "noop"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "w" ]
+run  = "cd /mnt/c/Users/Wong/"
+desc = "Cd to Windows dir"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "y" ]
+run  = "cd ~/.config/yazi"
+desc = "Cd to yazi config"
